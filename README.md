@@ -1,11 +1,30 @@
-# kickstarter-analysis
-# crowdfuning-analysis
-Analysis on crowd funding data to uncover trends.
-*An Analysis on Crowdfunding Campaigns
-An analysis of previous crowdfunding campaigns to aid Louise in her strategy for her own crowdfunding project.
-![Monthly Outcome Trends](https://user-images.githubusercontent.com/96352625/147868166-51bcb3d1-e41d-4521-934a-ff8fb938bf91.png)
-![Monthly Outcome Trends_Theater](https://user-images.githubusercontent.com/96352625/147868169-e434c5af-6030-42a6-bf59-057b23accf67.png)
-![Parent Category Outcomes_US](https://user-images.githubusercontent.com/96352625/147868176-10627acb-5048-4ef3-8e40-b349c7db2691.png)
-![Theater Subcategory](https://user-images.githubusercontent.com/96352625/147868179-1b99b8f4-31a5-4625-8082-eaf539c0a1b4.png)
-![GB Box   Whisker](https://user-images.githubusercontent.com/96352625/147868183-3f84548c-49cb-4959-9aef-015bbfd8dc30.png)
-Commit.
+# Analyzing Kickstarter Data
+## Overview of Project
+Our friend Louise asked for our help launching her new kickstarter campaign for her play, "Fever". Using previous kickstarter campaigns to analyze what campaigns were successful and what ones were failures. Succesful campaigns being those that reach or exceed their goals, and failures being those that do not. The data set utilized contains 4114 unique kickstarter campaigns across many categories from film to technology. Available variables include, campaign goals, pledges, number of backers, when the campaign launched, and when the campaign ended, as well as the type of project being funded. Using this data set, we were able to analyze what times of year campaigns are more successful and what monetary goals are reached more often than others. Using this analysis, Louise will know the best time to launch her campaign and how well it will fare relative to other campaigns of its goal. 
+### Purpose
+Help Louise launch a successful Kickstarter campaign for her play, "Fever"; using previous kickstarter data to undertstand what times of year and what goals are most successful.
+
+## Analysis and Challenges
+### Analysis of Outcomes Based on Launch Date
+Louise wants to know how different campaigns fare relative to their launch dates. Using the provided unix time, launch dates and deadlines were converted into standard short dates to more easily categorize them into months to visualize trends across the year. The campaigns had been previously categorized into "sucessful", "failed", "canceled", and "live" so that data was left as is. Because Louise is focused on plays, a pivot table was created to highlight how many plays were successful, failed, or canceled across their respective launch months. However, visualization of this analysis is more helpful so the pivot table was converted into a line graph. Illustrating trends across the year. 
+![Theater_Outcomes_vs_Launch](https://user-images.githubusercontent.com/96352625/147899006-0b5e9c6c-0169-4759-b3aa-bc7421b77963.png)
+The line graph shows us that campaigns launched in May are the most successful and that campaigns launched in November, December, and January are the least successful. Therefore, we recomend to Louise a May launch if possible. 
+
+### Analysis of Outcomes Based on Goals
+Louise also wants to know how campaigns fare relative to their goals. For this analysis, only plays were analyszed because those are the same category as Louise's campaign. Because goals range from less than $1000 to over $50000, they were categorized into 12 ranges that change every $5000. For example, "Less than $1000", "$1000 to $4999" and so on until "greater than $50000". Using the COUNTIFS function, play campaigns were categorized into these goal ranges and also seperated by outcome. For example, the function =COUNTIFS(Kickstarter!$F:$F, "successful",Kickstarter!$D:$D,  "<1000",Kickstarter!$R:$R, "plays") was used to count the number of play campaigns that were both succesful and had goals less than $1000. This function was repeated for the other 11 ranges and for "canceled" and "failed" campaigns with minor changes to the formula for an accurate count. However, this tabular data is not as helpful as turning it into percentages and visualizing it into a graph. The percentage of plays that were successful, canceled, and failed across the 12 goal ranges was calculated. For example, we leanred that 76% of campaigns with goals less than $1000 were succesful and that the other 24% failed (none were canceled). This new analysis was then illustrated in a line graph to better show Louise our findings.
+![Outcomes_vs_Goals](https://user-images.githubusercontent.com/96352625/147899227-8430147c-0cf3-4d90-a83e-eaa749e82c70.png)
+A quick review of this graph shows us that no play kickstarter campaigns were canceled. We can also see that campaigns less than $19999 trend towards success rates over %50 but between $20000 and $34999 they trend towards failure. Between $35000 and $44999 they reach an over %60 success rate but after $50000 they begin to fail again. Based on these findings, we recommend Louise keep her funding goal below $20000 for the highest chance at success. 
+
+### Challenges and Difficulties Encountered
+I encountered the most difficulty when using the COUNTIFS function in the second portion of the analysis. The largest formula used throughout the analysis there is more potential for small errors. It took quite a while for me to create a functioning formula because I was reffering to "play" instead of "plays" so I was receiving counts of 0. However, once I realized my error after a few minutes of review, I had a functioning formula and had no problems from there on out. 
+
+## Results
+Revewing the graph, titled "Theater Outcomes Based on Launch Date" we can conclude that campaigns launched in May are the most successful but that June & July also follow closely. Additionally, all 3 months have very similar failure rates even though success begins to fall in June and continuing through to September. Based on these findings, we suggest that Louise launch her campaign in May as they are the most succesful and she avoid the winter months of November, December, and January as they have the lowest level of success. The graph "Outcomes Based on Goals" shows us that goals less that $19999 have success rates over %50. Between $20000 and $34999 the campaigns fail more than succeed but between $35000 and $44999 they reach success rates of 67%. But beyond $45000 the failure rates jump to %100. Based on these findings, we suggest Louise have a goal of less than $20000 for the opportunity at the most success.
+
+## Limitations
+The dataset used in this analysis only presented a few limitations because what we were asked to analyze could be derived from the existing data. If not, it could be converted into a more appropriate form (unix time, for example). 
+
+## Future Additions for Analysis
+For additional analysis we could look at the length of campaigns relative to their outcomes. Subtract deadline from launch date to find the duration of the campaign and compare that to its outcome. One thing contributing to the success of a campaign could be its length. Longer campaigns have more time to gather backers for reaching their goals. This data could be displayed in a line graph. Duration on the x axis, outcome count on the y axis. Because durations can range heavily, we could do similar to what was done in "Outcomes Based on Goals" and place the durations into ranges.
+
+END.
